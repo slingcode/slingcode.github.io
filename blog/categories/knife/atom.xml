@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Release Engineering, Devtools, and Infrastructure Automation]]></title>
-  <link href="http://slingcode.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Knife | Release Engineering, Devtools, and Infrastructure Automation]]></title>
+  <link href="http://slingcode.github.io/blog/categories/knife/atom.xml" rel="self"/>
   <link href="http://slingcode.github.io/"/>
   <updated>2014-02-27T20:50:14-05:00</updated>
   <id>http://slingcode.github.io/</id>
@@ -22,7 +22,7 @@
 
 <p>Here is a diagram of a IAC workflow that uses Jenkins, Spork , Git and Knife to ensure only unique cookbook versions are uploaded to the Chef Server:</p>
 
-<p><img src="http://slingcode.github.io/images/IAC_Pipeline_Versioning.jpg" /></p>
+<p><img src="/images/IAC_Pipeline_Versioning.jpg" /></p>
 
 <p>I encountered four unexpected issues while implementing this workflow.</p>
 
@@ -44,12 +44,9 @@ The above workflow is based on conversations we had about a pipeline he has put 
 
 <p>Using the updated gem, the CI pipeline can handle the version check and bump with a single command:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>knife spork check <span class="nv">$COOKBOOK</span> -o <span class="nv">$WORKSPACE</span> –p
-</span></code></pre></td></tr></table></div></figure>
-
-
-
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2> Issue #2 – Jenkins checks out Git projects with a detached HEAD </h2>
 
@@ -60,24 +57,20 @@ The above workflow is based on conversations we had about a pipeline he has put 
 
 <p>Alternatively, the branch can be set from the Jenkins execute shell with a command like this:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>git checkout master
-</span></code></pre></td></tr></table></div></figure>
-
-
-
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2> Issue #3 – tricky bug with git diff –quiet </h2>
 
 
 <p>Ultimately determining if spork has updated the Git working directory is as simple as running:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git diff --exit-code
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git diff &amp;mdash;exit-code
 </span><span class='line'><span class="nv">GIT_STATUS</span><span class="o">=</span><span class="nv">$?</span>
-</span></code></pre></td></tr></table></div></figure>
-
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>However, I spent a significant amount of time trying to suppress the diff output and therefore kept running into this bug:  <a href="http://git.661346.n2.nabble.com/bug-with-git-diff-quiet-td7602438.html">http://git.661346.n2.nabble.com/bug-with-git-diff-quiet-td7602438.html</a></p>
 
@@ -101,7 +94,7 @@ The above workflow is based on conversations we had about a pipeline he has put 
 
 <p>With the above four issues resolved, this is what the block in Jenkins looks like:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -116,25 +109,30 @@ The above workflow is based on conversations we had about a pipeline he has put 
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Use Spork to check and then bump version if necessary</span>
-</span><span class='line'>knife spork check <span class="nv">$COOKBOOK</span> -o <span class="nv">$WORKSPACE</span> -p
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'><span class="c"># Check working directory for a version change</span>
-</span><span class='line'>git diff --exit-code
-</span><span class='line'><span class="nv">GIT_STATUS</span><span class="o">=</span><span class="nv">$?</span>
+</span><span class='line'>&lt;h1&gt;Use Spork to check and <span class="k">then </span>bump version <span class="k">if </span>necessary&lt;/h1&gt;
 </span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="nv">$GIT_STATUS</span> -eq 0 <span class="o">]</span>
+</span><span class='line'>&lt;p&gt;knife spork check <span class="nv">$COOKBOOK</span> -o <span class="nv">$WORKSPACE</span> -p&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Check working directory <span class="k">for </span>a version change&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git diff &amp;mdash;exit-code
+</span><span class='line'><span class="nv">GIT_STATUS</span><span class="o">=</span><span class="nv">$?</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;if <span class="o">[</span> <span class="nv">$GIT_STATUS</span> -eq 0 <span class="o">]</span>
 </span><span class='line'><span class="k">then</span>
 </span><span class='line'><span class="k">  </span><span class="nb">echo</span> “No changes to push back to Git repo”
 </span><span class='line'><span class="k">else</span>
-</span><span class='line'><span class="k">  </span><span class="nb">echo</span> “Need to merge version change back to Git repo<span class="s2">&quot;</span>
-</span><span class='line'><span class="s2">  git commit -a -m &quot;</span>From Jenkins IAC<span class="err">&quot;</span>
+</span><span class='line'><span class="k">  </span><span class="nb">echo</span> “Need to merge version change back to Git repo<span class="err">&quot;</span>
+</span><span class='line'>  git commit -a -m &amp;ldquo;From Jenkins IAC&amp;rdquo;
 </span><span class='line'>  git push origin HEAD:master
 </span><span class='line'><span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
